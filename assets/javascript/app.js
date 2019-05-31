@@ -3,8 +3,6 @@ $(document).ready(function(){
 
 
 
-
-
     var myQuestions = [
         {
             question: "1. In which fictional town does 'The Simpsons' take place?",
@@ -59,14 +57,37 @@ $(document).ready(function(){
                 d: "Ned Flanders"
             },
             correctAnswer: 'd'
-        }   
-    ];
+        }];
 
-    $("#donutStart").on("click", function(){
-        $("#main-section").html(questions.first);
-        $("#main-section").html(answers.first);
+    var numCorrect = 0;   
+    numCorrect = document.getElementById("answeredRight");
+    
+    var numWrong = 0;
+    numWrong = document.getElementById("answeredWrong");
 
-    })
+
+
+
+    var triviaGame = {
+        startQuiz: function(){
+        // $("#quiz").hide();
+        //to show all ofthe questions need to make a loop so that all of them are displayed
+        for(i=0; i < myQuestions.length; i++){
+            $["#simpsonsQuestions"].append(myQuestions[i].question);
+        //storing the answer choices for each of the questions in variables
+            var answerA = myQuestions[i].answers.a;
+            var answerB = myQuestions[i].answers.b;
+            var answerC = myQuestions[i].answers.c;
+            var answerD = myQuestions[i].answers.d;
+
+            $("#simpsonsQuestions").append('<input type="radio" value="' + answerA + '" />');
+            $("#simpsonsQuestions").append('<input type="radio" value="' + answerB + '" />');
+            $("#simpsonsQuestions").append('<input type="radio" value="' + answerC + '" />');
+            $("#simpsonsQuestions").append('<input type="radio" value="' + answerD + '" />');
+
+    //need to make a function that causes the quiz/quiz questions to appear 
+    //(and the other stuff to disappear)
+    $("#donutStart").on("click",triviaGame.startQuiz);
 //clicking the start button also needs to activate the timer (going down from 120 seconds)
 //code for the questions and choices
     //might need to make an array (with objects) to show questions
@@ -78,4 +99,16 @@ $(document).ready(function(){
 	    //answers you stored 
     //probably will have to make a variable that counts how many answers the user got correct 			(initially set it to 0, then you’ll use if/else statements or some sort of function to add to the 			score) 
 
+
+   
+        // https://stackoverflow.com/questions/5550785/how-to-create-a-radio-button-dynamically-with-jquery
+        //adding answers to the container
+
+        }
+            
+        }
+    }
+
+
+    
 })

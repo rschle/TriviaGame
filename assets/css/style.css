@@ -2,7 +2,7 @@ body{
     background-image: url(https://vignette.wikia.nocookie.net/simpsons/images/5/50/Wiki-background/revision/latest?cb=20111015160455);
 }
 
-#main-section{
+#quiz{
     background-color: steelblue;
     position: relative;
     margin-top: 100px;
@@ -35,4 +35,8 @@ h3{
     width: 300px;
     margin-left: 100px;
     margin-right: 100px;
+}
+
+#end-page{
+    display: none;
 }
