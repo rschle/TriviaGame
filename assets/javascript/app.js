@@ -70,24 +70,30 @@ $(document).ready(function(){
 
     var triviaGame = {
         startQuiz: function(){
-        // $("#quiz").hide();
-        //to show all ofthe questions need to make a loop so that all of them are displayed
+        // $("#quiz").empty
+        //to show all ofthe questions need t
+        $("#quiz").empty();
         for(i=0; i < myQuestions.length; i++){
-            $["#simpsonsQuestions"].append(myQuestions[i].question);
+            $("#quiz").append("<p>" + myQuestions[i].question + "</p>");
         //storing the answer choices for each of the questions in variables
             var answerA = myQuestions[i].answers.a;
             var answerB = myQuestions[i].answers.b;
             var answerC = myQuestions[i].answers.c;
             var answerD = myQuestions[i].answers.d;
 
-            $("#simpsonsQuestions").append('<input type="radio" value="' + answerA + '" />');
-            $("#simpsonsQuestions").append('<input type="radio" value="' + answerB + '" />');
-            $("#simpsonsQuestions").append('<input type="radio" value="' + answerC + '" />');
-            $("#simpsonsQuestions").append('<input type="radio" value="' + answerD + '" />');
+            $("#quiz").append('<input type="radio" value="' + answerA + '" />');
+            $("#quiz").append('<input type="radio" value="' + answerB + '" />');
+            $("#quiz").append('<input type="radio" value="' + answerC + '" />');
+            $("#quiz").append('<input type="radio" value="' + answerD + '" />');
+        }
 
+    }
+}
+    $("#donutStart").on("click", triviaGame.startQuiz);
+    
     //need to make a function that causes the quiz/quiz questions to appear 
     //(and the other stuff to disappear)
-    $("#donutStart").on("click",triviaGame.startQuiz);
+    
 //clicking the start button also needs to activate the timer (going down from 120 seconds)
 //code for the questions and choices
     //might need to make an array (with objects) to show questions
@@ -104,10 +110,9 @@ $(document).ready(function(){
         // https://stackoverflow.com/questions/5550785/how-to-create-a-radio-button-dynamically-with-jquery
         //adding answers to the container
 
-        }
             
-        }
-    }
+        
+
 
 
     
