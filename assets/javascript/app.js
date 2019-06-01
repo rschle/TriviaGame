@@ -5,61 +5,36 @@ var card = $("#quiz");
     var myQuestions = [
         {
             question: "1. In which fictional town does 'The Simpsons' take place?",
-            answers: {
-                a: "Sunnydale",
-                b: "Springfield",
-                c: "Smalleville",
-                d: "South Park"
-            },
-            correctAnswer: 'b',
+            answers: ["Sunnydale", "Springfield", "Smallville", "South Park"],
+            correctAnswer: "Springfield"
             // divClass: ".town"
         },
 
         {
             question: "2. What is the name of the bar where Homer drinks?",
-            answers:{
-                a: "Moe's Tavern",   
-                b: "Paddy's Pub",
-                c: "Mr. Pubbs",
-                d: "The Krusty Krab"
-            },
-            correctAnswer: 'a',
+            answers:["Moe's Tavern", "The Drunken Clam", "Mr. Pubbs", "The Krusty Krab"],
+            correctAnswer: "Moe's Tavern"
             // divClass: ".bar"
         },
 
         {
             question: "3. Who runs Kwik-E-Mart?",
-            answers:{
-                a: "Abraham Simpson",   
-                b: "Agnes Skinner",
-                c: "Arnie Pie",
-                d: "Apu Nahasapeemapetilon"
-            },
-            correctAnswer: 'd',
+            answers:["Abraham Simpson", "Agnes Skinner", "Arnie Pie", "Apu Nahasapeemapetilon"],
+            correctAnswer: "Apu Nahasapeemapetilon"
             // divClass: ".mart"
         },
 
         {
             question: "4. What is the name of Bart's favorite comic book action hero?",
-            answers:{
-                a: "Mezmorino",   
-                b: "Elasti-boy",
-                c: "Radioactive Man",
-                d: "Krusty the Clown"
-            },
-            correctAnswer: 'c',
+            answers:["Mezmorino", "Elasti-boy", "Radioactive Man", "Krusty the Clown"],
+            correctAnswer: "Radioactive Man"
             // divClass: ".comic"
         },
 
         {
             question: "5. What is the name of the Simpsons' next door neighbor?",
-            answers:{
-                a: "Barney Gumble",   
-                b: "Principal Skinner",
-                c: "Martin Prince",
-                d: "Ned Flanders"
-            },
-            correctAnswer: 'd',
+            answers:["Barney Gumble", "Principal Skinner", "Martin Prince", "Ned Flanders"],
+            correctAnswer: "Ned Flanders"
             // divClass:"."
         }];
 
@@ -86,37 +61,51 @@ var card = $("#quiz");
             var answerB = myQuestions[i].answers.b;
             var answerC = myQuestions[i].answers.c;
             var answerD = myQuestions[i].answers.d;
-
-            $("#quiz").append('<div class="radio-options1"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerA + '</div>');
-            $("#quiz").append('<div class="radio-options2"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerB + '</div>');
-            $("#quiz").append('<div class="radio-options3"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerC + '</div>');
-            $("#quiz").append('<div class="radio-options4"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerD + '</div>');
+        for(j=0; j < myQuestions[i].answers.length; j++){
+            card.append("<input type='radio' name='question-" + i +
+            "'value='" + myQuestions[i].answers[j] + "''>" + myQuestions[i].answers[j]);
+        }
+            // $("#quiz").append('<div class="radio-options1"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerA + '</div>');
+            // $("#quiz").append('<div class="radio-options2"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerB + '</div>');
+            // $("#quiz").append('<div class="radio-options3"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerC + '</div>');
+            // $("#quiz").append('<div class="radio-options4"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerD + '</div>');
         }
       $("#submitButton").show();  
+    }, //making a function to add user's answers to our empty userAnswered array
+        addAnswers: function(){
+        
+        console.log(input);
+        for(i=0; i < myQuestions.length; i++){
+            var input = card.children("input:checked").val();
+            triviaGame.userAnswered.push(input)
+            console.log(triviaGame.userAnswered);
+        }
+
+
     },
         checkScore: function(){
         //function to compare the user's answers to the correct answers so as to show the score on the final page
-        var input = card.children("input:checked");
-        console.log(input);
+        
+
         var rightAnswer;
         var numCorrect = 0;   
             numCorrect = document.getElementById("answeredRight");
-         var numWrong = 0;
+        var numWrong = 0;
         numWrong = document.getElementById("answeredWrong");
-        var checked = $("input:radio.radio-class1:checked");
-        console.log(checked);
+        //var checked = $("input:radio.radio-class1:checked");
+        // console.log(checked);
 
         for(i=0; i<myQuestions.length; i++){
-            triviaGame.userAnswered.push($('input[id=radio'+i+']:checked').val());
+           // triviaGame.userAnswered.push(input);
             
             rightAnswer = myQuestions[i].correctAnswer;
 
             if(triviaGame.userAnswered[i] === rightAnswer){
                 numCorrect++;
-                console.log(numCorrect);
+                // console.log(numCorrect);
             }else if(triviaGame.userAnswered[i] !== rightAnswer || userAnswered[i] === ""){
                 numWrong++;
-                console.log(numWrong);
+                // console.log(numWrong);
             }
         }
 
@@ -126,8 +115,8 @@ var card = $("#quiz");
     //$("#donutStart").on("click", triviaGame.showButton);
     
     $("#done-button").on("click", function(){
-        console.log(triviaGame.userAnswered);
-        triviaGame.checkScore();
+        // console.log(triviaGame.userAnswered);
+        triviaGame.addAnswers();
     })
     //need to make a function that causes the quiz/quiz questions to appear 
     //(and the other stuff to disappear)
