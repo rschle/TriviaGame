@@ -12,7 +12,8 @@ $(document).ready(function(){
                 c: "Smalleville",
                 d: "South Park"
             },
-            correctAnswer: 'b'
+            correctAnswer: 'b',
+            // divClass: ".town"
         },
 
         {
@@ -23,7 +24,8 @@ $(document).ready(function(){
                 c: "Mr. Pubbs",
                 d: "The Krusty Krab"
             },
-            correctAnswer: 'a'
+            correctAnswer: 'a',
+            // divClass: ".bar"
         },
 
         {
@@ -34,7 +36,8 @@ $(document).ready(function(){
                 c: "Arnie Pie",
                 d: "Apu Nahasapeemapetilon"
             },
-            correctAnswer: 'd'
+            correctAnswer: 'd',
+            // divClass: ".mart"
         },
 
         {
@@ -45,7 +48,8 @@ $(document).ready(function(){
                 c: "Radioactive Man",
                 d: "Krusty the Clown"
             },
-            correctAnswer: 'c'
+            correctAnswer: 'c',
+            // divClass: ".comic"
         },
 
         {
@@ -56,7 +60,8 @@ $(document).ready(function(){
                 c: "Martin Prince",
                 d: "Ned Flanders"
             },
-            correctAnswer: 'd'
+            correctAnswer: 'd',
+            // divClass:"."
         }];
 
     var numCorrect = 0;   
@@ -66,6 +71,7 @@ $(document).ready(function(){
     numWrong = document.getElementById("answeredWrong");
 
 
+    
 
 
     var triviaGame = {
@@ -73,6 +79,7 @@ $(document).ready(function(){
         // $("#quiz").empty
         //to show all ofthe questions need t
         $("#quiz").empty();
+        $("#submitButton").show()
         for(i=0; i < myQuestions.length; i++){
             $("#quiz").append("<p>" + myQuestions[i].question + "</p>");
         //storing the answer choices for each of the questions in variables
@@ -81,16 +88,42 @@ $(document).ready(function(){
             var answerC = myQuestions[i].answers.c;
             var answerD = myQuestions[i].answers.d;
 
-            $("#quiz").append('<input type="radio" value="' + answerA + '" />');
-            $("#quiz").append('<input type="radio" value="' + answerB + '" />');
-            $("#quiz").append('<input type="radio" value="' + answerC + '" />');
-            $("#quiz").append('<input type="radio" value="' + answerD + '" />');
+            $("#quiz").append('<div class="radio-options1"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerA + '</div>');
+            $("#quiz").append('<div class="radio-options2"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerB + '</div>');
+            $("#quiz").append('<div class="radio-options3"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerC + '</div>');
+            $("#quiz").append('<div class="radio-options4"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerD + '</div>');
         }
 
-    }
+    },
+
+        checkScore: function(){
+        //function to compare the user's answers to the correct answers so as to show the score on the final page
+        var userAnswered= [];
+        var rightAnswer;
+        var numCorrect = 0;   
+            numCorrect = document.getElementById("answeredRight");
+         var numWrong = 0;
+        numWrong = document.getElementById("answeredWrong");
+
+        for(i=0; i<myQuestions.length; i++){
+            userAnswered.push($('input[id=radio'+i+']:checked').text);
+            
+            rightAnswer = myQuestions[i].correctAnswer;
+
+            if(userAnswered[i] === rightAnswer){
+                numCorrect++;
+                console.log(numCorrect);
+            }else if(userAnswered[i] !== rightAnswer || userAnswered[i] === ""){
+                numWrong++;
+                console.log(numWrong);
+            }
+        }
+
+        }
 }
     $("#donutStart").on("click", triviaGame.startQuiz);
     
+    console.log(triviaGame.checkScore());
     //need to make a function that causes the quiz/quiz questions to appear 
     //(and the other stuff to disappear)
     

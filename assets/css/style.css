@@ -6,12 +6,14 @@ body{
     background-color: steelblue;
     position: relative;
     margin-top: 100px;
+    margin-bottom: 20px;
     margin-left: 100px;
     margin-right: 100px;
-    padding: 90px;
-    height: 600px;
+    padding: 120px;
+    height: 850px;
     font-family:  'Rock Salt', cursive;
     color: yellow;
+    font-size: 12px;
 }
 
 h1{
@@ -39,4 +41,8 @@ h3{
 
 #end-page{
     display: none;
+}
+
+#submitButton{
+    display:none;
 }
