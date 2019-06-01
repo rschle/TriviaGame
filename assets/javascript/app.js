@@ -7,37 +7,56 @@ var card = $("#quiz");
             question: "1. In which fictional town does 'The Simpsons' take place?",
             answers: ["Sunnydale", "Springfield", "Smallville", "South Park"],
             correctAnswer: "Springfield"
-            // divClass: ".town"
         },
 
         {
             question: "2. Which one of these is NOT one of Homer's catchphrases?",
             answers:["Woohoo!", "D'oh!", "Eat my shorts!", "Why you little!"],
             correctAnswer: "Eat my shorts!"
-            // divClass: ".bar"
         },
 
         {
             question: "3. Who runs Kwik-E-Mart?",
             answers:["Abraham Simpson", "Agnes Skinner", "Arnie Pie", "Apu Nahasapeemapetilon"],
             correctAnswer: "Apu Nahasapeemapetilon"
-            // divClass: ".mart"
         },
 
         {
             question: "4. What is the name of Bart's favorite comic book action hero?",
             answers:["Mezmorino", "Elasti-boy", "Radioactive Man", "Krusty the Clown"],
             correctAnswer: "Radioactive Man"
-            // divClass: ".comic"
         },
 
         {
             question: "5. What is the name of the Simpsons' next door neighbor?",
             answers:["Barney Gumble", "Principal Skinner", "Martin Prince", "Ned Flanders"],
             correctAnswer: "Ned Flanders"
-            // divClass:"."
         }];
 
+    //storing functions for the timer as well as function showing the endpage
+    var compete = {
+        startingTime: 60,
+
+        commencingCountdown: function(){
+            $("#quiz").append("Time Left: " + compete.startingTime);
+            setInterval(compete.enginesOn, 1000);
+
+        },
+
+        enginesOn: function(){
+            compete.startingTime--;
+            $("#quiz").prepend("Time Left: " + compete.startingTime);
+            if(compete.startingTime === 0){
+                //need to make a subsequent function that causes the timer to stop
+            }
+        },
+
+        nothingICanDo: function(){
+            clearInterval();
+        }
+
+
+    }
 
     var triviaGame = {
         startQuiz: function(){
