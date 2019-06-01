@@ -96,8 +96,7 @@ $(document).ready(function(){
     },
 
         showButton: function(){
-        $("#submitButton").show();
-        $("#submitButton").append('<button class="btn btn-primary" id="done-button" type="submit">Submit</button>')
+        $("#quiz").append('<button class="btn btn-primary" id="done-button" type="submit">Submit</button>')
 
     },
 
@@ -128,6 +127,7 @@ $(document).ready(function(){
         }
 }
     $("#donutStart").on("click", triviaGame.startQuiz);
+    $("#donutStart").on("click", triviaGame.showButton);
     
     console.log(triviaGame.checkScore());
     //need to make a function that causes the quiz/quiz questions to appear 
