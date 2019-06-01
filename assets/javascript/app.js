@@ -79,7 +79,6 @@ $(document).ready(function(){
         // $("#quiz").empty
         //to show all ofthe questions need t
         $("#quiz").empty();
-        $("#submitButton").show()
         for(i=0; i < myQuestions.length; i++){
             $("#quiz").append("<p>" + myQuestions[i].question + "</p>");
         //storing the answer choices for each of the questions in variables
@@ -93,8 +92,15 @@ $(document).ready(function(){
             $("#quiz").append('<div class="radio-options3"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerC + '</div>');
             $("#quiz").append('<div class="radio-options4"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerD + '</div>');
         }
+        
+    },
+
+        showButton: function(){
+        $("#submitButton").show();
+        $("#submitButton").append('<button class="btn btn-primary" id="done-button" type="submit">Submit</button>')
 
     },
+
 
         checkScore: function(){
         //function to compare the user's answers to the correct answers so as to show the score on the final page
