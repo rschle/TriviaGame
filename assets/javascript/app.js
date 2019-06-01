@@ -1,8 +1,7 @@
 $(document).ready(function(){
     //Make it so that when you click the start button, the questions are shown 
 
-
-
+var card = $("#quiz");
     var myQuestions = [
         {
             question: "1. In which fictional town does 'The Simpsons' take place?",
@@ -75,6 +74,7 @@ $(document).ready(function(){
 
 
     var triviaGame = {
+        userAnswered: [],
         startQuiz: function(){
         // $("#quiz").empty
         //to show all ofthe questions need t
@@ -92,33 +92,29 @@ $(document).ready(function(){
             $("#quiz").append('<div class="radio-options3"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerC + '</div>');
             $("#quiz").append('<div class="radio-options4"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerD + '</div>');
         }
-        
+      $("#submitButton").show();  
     },
-
-        showButton: function(){
-        $("#quiz").append('<button class="btn btn-primary" id="done-button" type="submit">Submit</button>')
-
-    },
-
-
         checkScore: function(){
         //function to compare the user's answers to the correct answers so as to show the score on the final page
-        var userAnswered= [];
+        var input = card.children("input:checked");
+        console.log(input);
         var rightAnswer;
         var numCorrect = 0;   
             numCorrect = document.getElementById("answeredRight");
          var numWrong = 0;
         numWrong = document.getElementById("answeredWrong");
+        var checked = $("input:radio.radio-class1:checked");
+        console.log(checked);
 
         for(i=0; i<myQuestions.length; i++){
-            userAnswered.push($('input[id=radio'+i+']:checked').text);
+            triviaGame.userAnswered.push($('input[id=radio'+i+']:checked').val());
             
             rightAnswer = myQuestions[i].correctAnswer;
 
-            if(userAnswered[i] === rightAnswer){
+            if(triviaGame.userAnswered[i] === rightAnswer){
                 numCorrect++;
                 console.log(numCorrect);
-            }else if(userAnswered[i] !== rightAnswer || userAnswered[i] === ""){
+            }else if(triviaGame.userAnswered[i] !== rightAnswer || userAnswered[i] === ""){
                 numWrong++;
                 console.log(numWrong);
             }
@@ -127,9 +123,12 @@ $(document).ready(function(){
         }
 }
     $("#donutStart").on("click", triviaGame.startQuiz);
-    $("#donutStart").on("click", triviaGame.showButton);
+    //$("#donutStart").on("click", triviaGame.showButton);
     
-    console.log(triviaGame.checkScore());
+    $("#done-button").on("click", function(){
+        console.log(triviaGame.userAnswered);
+        triviaGame.checkScore();
+    })
     //need to make a function that causes the quiz/quiz questions to appear 
     //(and the other stuff to disappear)
     
