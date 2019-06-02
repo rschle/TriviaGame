@@ -51,10 +51,11 @@ var card = $("#quiz");
 
             //console.log(triviaGame.counter);
             if(triviaGame.counter === 0){
+                $("#done-button").hide();
+                $("#timerSection").empty();
                 triviaGame.stop();
                 triviaGame.checkScore();
                 triviaGame.showEndpage();
-
             }
         },
         stop: function(){
@@ -87,8 +88,8 @@ var card = $("#quiz");
     showEndpage: function() {
         $("#quiz").empty();
         $("#quiz").html("<h2> See how you did! </h2>");
-        $("#quiz").append("<p> Number right: " + numCorrect + "</p>" )
-        $("#quiz").append("<p> Number wrong: " + numWrong + "</p>" )
+        $("#quiz").append("<p> Number right : </p>" )
+        $("#quiz").append("<p> Number wrong : </p>" )
 
     },
         checkScore: function(){
@@ -123,7 +124,7 @@ var card = $("#quiz");
     $("#done-button").on("click", function(){
         // console.log(triviaGame.userAnswered);
         $("#done-button").hide();
-        $("<h3/>").hide();
+        $("#timerSection").empty();
         triviaGame.stop();
         triviaGame.checkScore();
         triviaGame.showEndpage();
