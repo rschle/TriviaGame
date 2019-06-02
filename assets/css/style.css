@@ -5,12 +5,12 @@ body{
 #quiz{
     background-color: steelblue;
     position: relative;
-    margin-top: 100px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 0px;
     margin-left: 100px;
     margin-right: 100px;
     padding: 120px;
-    height: 850px;
+    height: 900px;
     font-family:  'Rock Salt', cursive;
     color: yellow;
     font-size: 12px;
@@ -58,8 +58,8 @@ h3{
     border: 1px solid;
     border-color: yellow;
     position: relative;
-    top: -300px;
-    left: 300px;
+    top: -60px;
+    left: 210px;
 }
 
 #done-button:hover{
@@ -73,6 +73,6 @@ h3{
     border: 1px solid;
     border-color: yellow;
     position: relative;
-    top: -300px;
-    left: 300px;
+    top: -60px;
+    left: 210px;
 }

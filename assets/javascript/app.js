@@ -44,7 +44,7 @@ var card = $("#quiz");
 
 
     var triviaGame = {
-        counter: 5,
+        counter: 60,
         countdown: function(){
             triviaGame.counter--;
         $("#timerSection").html("<h3> Time left : " + triviaGame.counter + "</h3>");
@@ -77,8 +77,8 @@ var card = $("#quiz");
                 var answerC = myQuestions[i].answers.c;
                 var answerD = myQuestions[i].answers.d;
             for(var j=0; j < myQuestions[i].answers.length; j++){
-                card.append("<input type='radio' class='quizRadio' name='radio" + i +
-                "'value='" + myQuestions[i].answers[j] + "''>" + myQuestions[i].answers[j]);
+                card.append("<div><input type='radio' class='quizRadio' name='radio" + i +
+                "'value='" + myQuestions[i].answers[j] + "''>" + myQuestions[i].answers[j] + "</div>" );
          }
           
         }
@@ -88,8 +88,8 @@ var card = $("#quiz");
     showEndpage: function() {
         $("#quiz").empty();
         $("#quiz").html("<h2> See how you did! </h2>");
-        $("#quiz").append("<p> Number right : </p>" )
-        $("#quiz").append("<p> Number wrong : </p>" )
+        $("#quiz").append("<p> Number right :" + numCorrect + "</p>" )
+        $("#quiz").append("<p> Number wrong :" + numWrong +  "</p>" )
 
     },
         checkScore: function(){
@@ -97,11 +97,6 @@ var card = $("#quiz");
         var rightAnswer;
         var numCorrect = 0;  
         var numWrong = 0; 
-        //numCorrect = document.getElementById("answeredRight");
-        //numWrong = document.getElementById("answeredWrong");
-        //var checked = $("input:radio.radio-class1:checked");
-        // console.log(checked);
-
         for(var i=0; i < myQuestions.length; i++){
            // triviaGame.userAnswered.push(input);
             rightAnswer = myQuestions[i].correctAnswer;
