@@ -47,3 +47,32 @@ h3{
     display:none;
 }
 
+#done-button{
+    width: 200px;
+    border-radius: 0%;
+    height: 50px;
+    font-family: 'Rock Salt', cursive;
+    font-size: 25px;
+    color: yellow;
+    background-color: red;
+    border: 1px solid;
+    border-color: yellow;
+    position: relative;
+    top: -300px;
+    left: 300px;
+}
+
+#done-button:hover{
+    width: 200px;
+    border-radius: 0%;
+    height: 50px;
+    font-family: 'Rock Salt', cursive;
+    font-size: 25px;
+    color: red;
+    background-color:yellow;
+    border: 1px solid;
+    border-color: yellow;
+    position: relative;
+    top: -300px;
+    left: 300px;
+}

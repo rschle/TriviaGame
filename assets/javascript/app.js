@@ -3,6 +3,7 @@ $(document).ready(function(){
 
 var timer;
 
+
 var card = $("#quiz");
 
     var myQuestions = [
@@ -43,12 +44,15 @@ var card = $("#quiz");
 
 
     var triviaGame = {
-        counter: 60,
+        counter: 5,
         countdown: function(){
             triviaGame.counter--;
-            console.log(triviaGame.counter);
+        $("#timerSection").html("<h3> Time left : " + triviaGame.counter + "</h3>");
+
+            //console.log(triviaGame.counter);
             if(triviaGame.counter === 0){
                 triviaGame.stop();
+                triviaGame.checkScore();
                 triviaGame.showEndpage();
 
             }
@@ -63,6 +67,7 @@ var card = $("#quiz");
             //console.log(timer);
             //to show all ofthe questions need t
             $("#quiz").empty();
+            $("#quiz").prepend("<h3> Answer the questions below before time runs out! </h3>")
             for(var i=0; i < myQuestions.length; i++){
                 $("#quiz").append("<p>" + myQuestions[i].question + "</p>");
             //storing the answer choices for each of the questions in variables
@@ -80,22 +85,24 @@ var card = $("#quiz");
     },
 
     showEndpage: function() {
-        $("#quiz").empty
-        $("#end-page").show();
+        $("#quiz").empty();
+        $("#quiz").html("<h2> See how you did! </h2>");
+        $("#quiz").append("<p> Number right: " + numCorrect + "</p>" )
+        $("#quiz").append("<p> Number wrong: " + numWrong + "</p>" )
+
     },
         checkScore: function(){
         //function to compare the user's answers to the correct answers so as to show the score on the final page
         var rightAnswer;
-        var numCorrect = 0;   
+        var numCorrect = 0;  
+        var numWrong = 0; 
         //numCorrect = document.getElementById("answeredRight");
-        var numWrong = 0;
         //numWrong = document.getElementById("answeredWrong");
         //var checked = $("input:radio.radio-class1:checked");
         // console.log(checked);
 
         for(var i=0; i < myQuestions.length; i++){
            // triviaGame.userAnswered.push(input);
-            
             rightAnswer = myQuestions[i].correctAnswer;
             userAnswered = $("input[name=radio"+i+"]:checked").val();
 
@@ -107,15 +114,19 @@ var card = $("#quiz");
                 console.log(numWrong);
             }
         }
-
-        }
+    }
+        
 }
     $("#donutStart").on("click", triviaGame.startQuiz);
     //$("#donutStart").on("click", triviaGame.showButton);
     
     $("#done-button").on("click", function(){
         // console.log(triviaGame.userAnswered);
+        $("#done-button").hide();
+        $("<h3/>").hide();
+        triviaGame.stop();
         triviaGame.checkScore();
+        triviaGame.showEndpage();
     })
     //need to make a function that causes the quiz/quiz questions to appear 
     //(and the other stuff to disappear)
