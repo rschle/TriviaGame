@@ -1,85 +1,87 @@
 $(document).ready(function(){
     //Make it so that when you click the start button, the questions are shown 
 
+var timer;
+
 var card = $("#quiz");
+
     var myQuestions = [
         {
             question: "1. In which fictional town does 'The Simpsons' take place?",
             answers: ["Sunnydale", "Springfield", "Smallville", "South Park"],
             correctAnswer: "Springfield"
+            // divClass: ".town"
         },
 
         {
             question: "2. Which one of these is NOT one of Homer's catchphrases?",
             answers:["Woohoo!", "D'oh!", "Eat my shorts!", "Why you little!"],
             correctAnswer: "Eat my shorts!"
+            // divClass: ".bar"
         },
 
         {
             question: "3. Who runs Kwik-E-Mart?",
             answers:["Abraham Simpson", "Agnes Skinner", "Arnie Pie", "Apu Nahasapeemapetilon"],
             correctAnswer: "Apu Nahasapeemapetilon"
+            // divClass: ".mart"
         },
 
         {
             question: "4. What is the name of Bart's favorite comic book action hero?",
             answers:["Mezmorino", "Elasti-boy", "Radioactive Man", "Krusty the Clown"],
             correctAnswer: "Radioactive Man"
+            // divClass: ".comic"
         },
 
         {
             question: "5. What is the name of the Simpsons' next door neighbor?",
             answers:["Barney Gumble", "Principal Skinner", "Martin Prince", "Ned Flanders"],
             correctAnswer: "Ned Flanders"
+            // divClass:"."
         }];
 
-    //storing functions for the timer as well as function showing the endpage
-    var compete = {
-        startingTime: 60,
-
-        commencingCountdown: function(){
-            $("#quiz").append("Time Left: " + compete.startingTime);
-            setInterval(compete.enginesOn, 1000);
-
-        },
-
-        enginesOn: function(){
-            compete.startingTime--;
-            $("#quiz").prepend("Time Left: " + compete.startingTime);
-            if(compete.startingTime === 0){
-                //need to make a subsequent function that causes the timer to stop
-            }
-        },
-
-        nothingICanDo: function(){
-            clearInterval();
-        }
-
-
-    }
 
     var triviaGame = {
+        counter: 60,
+        countdown: function(){
+            triviaGame.counter--;
+            console.log(triviaGame.counter);
+            if(triviaGame.counter === 0){
+                triviaGame.stop();
+                triviaGame.showEndpage();
+
+            }
+        },
+        stop: function(){
+            clearInterval(timer);
+        },
+
         startQuiz: function(){
-        // $("#quiz").empty
-        //to show all ofthe questions need t
-        $("#quiz").empty();
-        for(var i=0; i < myQuestions.length; i++){
-            $("#quiz").append("<p>" + myQuestions[i].question + "</p>");
-        //storing the answer choices for each of the questions in variables
-            var answerA = myQuestions[i].answers.a;
-            var answerB = myQuestions[i].answers.b;
-            var answerC = myQuestions[i].answers.c;
-            var answerD = myQuestions[i].answers.d;
-        for(var j=0; j < myQuestions[i].answers.length; j++){
-            card.append("<input type='radio' class='quizRadio' name='radio" + i +
-            "'value='" + myQuestions[i].answers[j] + "''>" + myQuestions[i].answers[j]);
+            clearInterval(timer);
+            timer = setInterval(triviaGame.countdown, 1000);
+            //console.log(timer);
+            //to show all ofthe questions need t
+            $("#quiz").empty();
+            for(var i=0; i < myQuestions.length; i++){
+                $("#quiz").append("<p>" + myQuestions[i].question + "</p>");
+            //storing the answer choices for each of the questions in variables
+                var answerA = myQuestions[i].answers.a;
+                var answerB = myQuestions[i].answers.b;
+                var answerC = myQuestions[i].answers.c;
+                var answerD = myQuestions[i].answers.d;
+            for(var j=0; j < myQuestions[i].answers.length; j++){
+                card.append("<input type='radio' class='quizRadio' name='radio" + i +
+                "'value='" + myQuestions[i].answers[j] + "''>" + myQuestions[i].answers[j]);
+         }
+          
         }
-            // $("#quiz").append('<div class="radio-options1"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerA + '</div>');
-            // $("#quiz").append('<div class="radio-options2"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerB + '</div>');
-            // $("#quiz").append('<div class="radio-options3"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerC + '</div>');
-            // $("#quiz").append('<div class="radio-options4"><input type="radio" name="radio-group'+i+'" id="radio'+i+'">' + answerD + '</div>');
-        }
-      $("#submitButton").show();  
+       $("#submitButton").show();  
+    },
+
+    showEndpage: function() {
+        $("#quiz").empty
+        $("#end-page").show();
     },
         checkScore: function(){
         //function to compare the user's answers to the correct answers so as to show the score on the final page
