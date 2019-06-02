@@ -2,7 +2,9 @@ $(document).ready(function(){
     //Make it so that when you click the start button, the questions are shown 
 
 var timer;
-
+var numCorrect = 0;  
+var numWrong = 0; 
+var rightAnswer;
 
 var card = $("#quiz");
 
@@ -94,9 +96,6 @@ var card = $("#quiz");
     },
         checkScore: function(){
         //function to compare the user's answers to the correct answers so as to show the score on the final page
-        var rightAnswer;
-        var numCorrect = 0;  
-        var numWrong = 0; 
         for(var i=0; i < myQuestions.length; i++){
            // triviaGame.userAnswered.push(input);
             rightAnswer = myQuestions[i].correctAnswer;
